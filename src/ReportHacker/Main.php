@@ -13,6 +13,7 @@
 
     public function onEnable(){
       $this->getServer()->getPluginManager()->registerEvents($this, $this);
+      $this->getServer()->getLogger()->info(TF::GREEN . "ReportHacker by MCrafters enabled!");
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
@@ -46,4 +47,9 @@
         }
       }
     }
+    
+    public function onDisable(){
+      $this->getServer()->getLogger()->info(TF::RED . "ReportHacker by MCrafters disabled!");
+    }
+    
   }

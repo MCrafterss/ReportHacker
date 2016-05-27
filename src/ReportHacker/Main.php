@@ -9,76 +9,47 @@
   use pocketmine\command\Command;
   use pocketmine\command\CommandSender;
 
-  class Main extends PluginBase implements Listener {
+  class Main extends PluginBase implements Listener{
 
-    public function onEnable() {
-
+    public function onEnable(){
       $this->getServer()->getPluginManager()->registerEvents($this, $this);
-
+      $this->getServer()->getLogger()->info(TF::GREEN . "ReportHacker by MCrafters enabled!");
     }
 
-    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-
-      if(strtolower($cmd->getName()) === "reporthacker") {
-
-        if(!(isset($args[0]))) {
-
+    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
+      if(strtolower($cmd->getName()) === "reporthacker"){
+        if(!(isset($args[0]))){
           $sender->sendMessage(TF::RED . "Error: not enough args. Usage: /reporthacker <player>");
-
           return true;
-
-        } else {
-
+        }else{
           $sender_name = $sender->getName();
-
           $sender_display_name = $sender->getDisplayName();
-
           $name = $args[0];
-
           $player = $this->getServer()->getPlayer($name);
-
-          if($player === null) {
-
-            foreach($this->getServer()->getOnlinePlayers() as $p) {
-
-              if($p->isOp()) {
-
+          if($player === null){
+            foreach($this->getServer()->getOnlinePlayers() as $p){
+              if($p->hasPermission("rh.admin")){
                 $p->sendMessage(TF::YELLOW . $sender_name . " reported " . $name . " for using hacks/mods!");
-
               }
-
             }
-
-            $sender->sendMessage(TF::GREEN . "Sent report to all op(s).");
-
+            $sender->sendMessage(TF::GREEN . "Sent report to all online Admin(s).");
             return true;
-
-          } else {
-
-            foreach($this->getServer()->getOnlinePlayers() as $p) {
-
-              if($p->isOp()) {
-
+          }else{
+            foreach($this->getServer()->getOnlinePlayers() as $p){
+              if($p->hasPermission("rh.admin")){
                 $p->sendMessage(TF::YELLOW . $sender_name . " reported " . $name . " for using hacks/mods!");
-
               }
-
             }
-
             $player->sendMessage(TF::YELLOW . $sender_name . " has reported you for using hacks/mods!");
-
-            $sender->sendMessage(TF::GREEN . "Sent report to all op(s).");
-
+            $sender->sendMessage(TF::GREEN . "Sent report to all online Admin(s).");
             return true;
-
           }
-
         }
-
       }
-
     }
-
+    
+    public function onDisable(){
+      $this->getServer()->getLogger()->info(TF::RED . "ReportHacker by MCrafters disabled!");
+    }
+    
   }
-
-?>

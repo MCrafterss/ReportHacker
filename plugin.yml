@@ -6,8 +6,9 @@ main: ReportHacker\Main
 commands:
   reporthacker:
     description: Report A Hacker/Modder!
-    usage: "/reporthacker <player>"
+    usage: "/report <player>"
     permission: reporthacker.command
+    aliases: [report, rpt]
 permissions:
   reporthacker.command:
     default: true

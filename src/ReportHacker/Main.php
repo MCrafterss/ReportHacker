@@ -13,13 +13,13 @@
 
     public function onEnable(){
       $this->getServer()->getPluginManager()->registerEvents($this, $this);
-      $this->getServer()->getLogger()->info(TF::GREEN . "ReportHacker by MCrafters enabled!");
+      $this->getServer()->getLogger()->info(TF::GREEN . "ReportHacker by MCrafters Enabled!");
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
       if(strtolower($cmd->getName()) === "reporthacker"){
         if(!(isset($args[0]))){
-          $sender->sendMessage(TF::RED . "Error: not enough args. Usage: /reporthacker <player>");
+          $sender->sendMessage(TF::RED . "Error: Not Enough Args. Usage: /reporthacker <player>");
           return true;
         }else{
           $sender_name = $sender->getName();
@@ -32,7 +32,7 @@
                 $p->sendMessage(TF::YELLOW . $sender_name . " reported " . $name . " for using hacks/mods!");
               }
             }
-            $sender->sendMessage(TF::GREEN . "Sent report to all online Admin(s).");
+            $sender->sendMessage(TF::GREEN . "Sent Report to All Online Admin(s).");
             return true;
           }else{
             foreach($this->getServer()->getOnlinePlayers() as $p){
@@ -41,7 +41,7 @@
               }
             }
             $player->sendMessage(TF::YELLOW . $sender_name . " has reported you for using hacks/mods!");
-            $sender->sendMessage(TF::GREEN . "Sent report to all online Admin(s).");
+            $sender->sendMessage(TF::GREEN . "Sent Report to All Online Admin(s).");
             return true;
           }
         }
@@ -49,7 +49,7 @@
     }
     
     public function onDisable(){
-      $this->getServer()->getLogger()->info(TF::RED . "ReportHacker by MCrafters disabled!");
+      $this->getServer()->getLogger()->info(TF::RED . "ReportHacker by MCrafters Disabled!");
     }
     
   }
